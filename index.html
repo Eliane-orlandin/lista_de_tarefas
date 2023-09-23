@@ -1,23 +1,72 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
   <head>
-    <meta charset="utf-8" />
-    <title>My test page</title>
-    <link rel="stylesheet" href="styles.css" />
-    <!--BOOTSTRAP-->
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Olá, mundo!</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+        <div class="card"
+            <div class="card-body">
+                 <h1 class="card-title">Lista de compras</h1>
+                 
+                 <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Informe o produto" aria-label="Recipiente para nickname" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary">Adicionar</button>
+                     </div>
+                    </div>
+
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Item</th>
+                                    <th>Editar</th>
+                                    <th>Excluir</th>
+                                </tr>
+                                
+
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Arroz</td>
+                                    <td>
+                                        <button>
+                                            <span class="material-icons">mode_edit</span>
+                                        </button>
+                                        
+                                    </td>
+                                    <td>
+                                        <button><span class="material-icons">delete</span> </button>
+                                       
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+
+                
+                        </table>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-danger btn-sm">Apagar itens</button>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</head>
-  <body>
-    <!-- Comentariosyl-->
-    <p>This is my page</p>
-    <h1>H1</h1>
-    <h2>H2</h2>
-    <h3>H3</h3>
-    <h4>H4</h4>
-    <h4>Outro H4</h4>
-    <h5>H5</h5>
+    
+    
   </body>
 </html>
