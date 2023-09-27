@@ -1,3 +1,4 @@
+// Seleciona os seletores
 function pegarInput(){
     // Acessa classe document e busca elemento pelo id
     var inputElement = document.getElementById("input-produto")
@@ -12,6 +13,7 @@ function pegarInput(){
     // Move o foco para o elemento encontrado
     inputElement.focus()
 }
+// Manipulação do DOM
 function criaLinhaProduto(nomeDoProduto){
     // Cria elemnto linha com  os elementos internos
     var linhaProduto = document.createElement("tr")
@@ -24,6 +26,7 @@ function criaLinhaProduto(nomeDoProduto){
     var botaoEditar = document.createElement("button")
     botaoEditar.className = "btn"
     botaoEditar.type = "button"
+    botaoEditar.addEventListener("click", editaProduto)
     
     var iconeEditar = document.createElement("span")
     iconeEditar.className = "material-icons"
@@ -65,8 +68,39 @@ function criaLinhaProduto(nomeDoProduto){
     // Buscar o tbody
     var elementoTBody = document.getElementById('registro-produto')
     //  Anexa a linha produto ao tbody
-    elementoTBody.appendChild(linhaProduto)
+    elementoTBody.appendChild(linhaProduto)    
+}
+// Eventos
+
+function editaProduto(objetoDeEventos){
+    var elementoButtonOrSpan = objetoDeEventos.target
+    var elementoTd
     
+    if (elementoButtonOrSpan.tagName === "BUTTON"){
+        elementoTd = elementoButtonOrSpan.parentNode
+    }else{
+        elementoTd = elementoButtonOrSpan.parentNode.parentNode
+    }
+    
+    var elementoTdPreviousSiblings = elementoTd.previousSibling
+    
+    var elementoInput = criaEntradaDeTexto(elementoTdPreviousSiblings.innerText)
 
+    elementoTdPreviousSiblings.innerText = ""
+    elementoTdPreviousSiblings.appendChild(elementoInput)
+}
+function criaEntradaDeTexto(textoAtual){
+    var container = document.createElement("div")
+    var entradaDeTexto = document.createElement("input")
+    entradaDeTexto.value = textoAtual
+    var botaoConfirmar = document.createElement("button")
+    botaoConfirmar.innerText = "✔️"
+    var botaoCancelar = document.createElement("button")
+    botaoCancelar.innerText = "❌"
 
+    container.appendChild(entradaDeTexto)
+    container.appendChild(botaoConfirmar)
+    container.appendChild(botaoCancelar)
+
+    return container
 }
