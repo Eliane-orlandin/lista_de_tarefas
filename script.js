@@ -12,18 +12,18 @@ function pegarValorDeInputTarefa(){
 
 }
 
-function criaElementoTarefaNaListaDeTarefas(){
-    
-
+function criaElementoTarefaNaListaDeTarefas(parametroNomeDaTarefa){
     const elementoParagrafoTarefa = document.createElement("p")
-    elementoParagrafoTarefa.innerText = "parametroNomeDaTarefa"
+    elementoParagrafoTarefa.innerText = parametroNomeDaTarefa
 
     const elementoBotaoEditarTarefa = document.createElement("button")
     elementoBotaoEditarTarefa.innerText = "Editar"
+    elementoBotaoEditarTarefa.className = "waves-effect waves-light btn-small"
     elementoBotaoEditarTarefa.addEventListener("click", editaElementoTarefaNaListaDeTarefa)
 
     const elementoBotaoExcluirTarefa = document.createElement("button")
     elementoBotaoExcluirTarefa.innerText = "Excluir"
+    elementoBotaoExcluirTarefa.className = "waves-effect waves-light btn-small red darken-2"
     elementoBotaoExcluirTarefa.addEventListener("click", removeElementoTarefaNalistaDeTarefas)
 
     const elementoDivTarefa = document.createElement("div")
@@ -38,7 +38,6 @@ function criaElementoTarefaNaListaDeTarefas(){
 function removeElementoTarefaNalistaDeTarefas(objetoDeEventos){
     const botaoQueFoiClicado = objetoDeEventos.target
     botaoQueFoiClicado.parentNode.remove()
-
 }
 
 function editaElementoTarefaNaListaDeTarefa(objetoDeEventos){
