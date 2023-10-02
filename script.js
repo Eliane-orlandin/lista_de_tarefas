@@ -20,6 +20,7 @@ function criaElementoTarefaNaListaDeTarefas(){
 
     const elementoBotaoEditarTarefa = document.createElement("button")
     elementoBotaoEditarTarefa.innerText = "Editar"
+    elementoBotaoEditarTarefa.addEventListener("click", editaElementoTarefaNaListaDeTarefa)
 
     const elementoBotaoExcluirTarefa = document.createElement("button")
     elementoBotaoExcluirTarefa.innerText = "Excluir"
@@ -34,8 +35,19 @@ function criaElementoTarefaNaListaDeTarefas(){
     elementoDivTarefas.appendChild(elementoDivTarefa)
 }
 
-function removeElementoTarefaNalistaDeTarefas(parametroObjetoDeEventos){
+function removeElementoTarefaNalistaDeTarefas(objetoDeEventos){
     const botaoQueFoiClicado = objetoDeEventos.target
     botaoQueFoiClicado.parentNode.remove()
+
+}
+
+function editaElementoTarefaNaListaDeTarefa(objetoDeEventos){
+    const botaoQueFoiClicado = objetoDeEventos.target
+    const paragrafoDaTarefa = botaoQueFoiClicado.previousSibling
+    const textoInternoDoParagrafo = paragrafoDaTarefa.innerText
+    const elementoInputTarefa = document.getElementById("input-tarefa")
+    elementoInputTarefa.value = textoInternoDoParagrafo
+    botaoQueFoiClicado.parentNode.remove()
+
 
 }
