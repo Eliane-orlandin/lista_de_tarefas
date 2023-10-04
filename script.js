@@ -1,16 +1,25 @@
+const CHAVE_DO_LOCAL_STORAGE ="listaDeTarefas"
 function pegarValorDeInputTarefa(){
     const elementoInputTarefa = document.getElementById("input-tarefa")
     const nomeDaTarefa = elementoInputTarefa.value
+    const listaDeTarefasSalvas = recuperaListaDeTarefasNoLocalStorage()
     
-    if(nomeDaTarefa === "" || nomeDaTarefa === undefined){
-        alert("Digite o nome da tarefa!")
+    
+    if(nomeDaTarefa === "" || nomeDaTarefa === undefined || listaDeTarefasSalvas.includes(nomeDaTarefa)){
+        alert("Tarefa já cadastrada!!")
     } else {
         elementoInputTarefa.value = ""
         elementoInputTarefa.focus()
         criaElementoTarefaNaListaDeTarefas(nomeDaTarefa)
+        salvaListaDeTarefasNoLocalStorage(parametroNomeDaTarefa)    
     }
-
 }
+
+function recuperaListaDeTarefasNoLocalStorage(){
+    const listaDeTarefas = []
+    return JSON.parse(localStorage.getItem(CHAVE_DO_LOCAL_STORAGE)) ?? []
+}
+
 
 function criaElementoTarefaNaListaDeTarefas(parametroNomeDaTarefa){
     
@@ -41,16 +50,34 @@ function criaElementoTarefaNaListaDeTarefas(parametroNomeDaTarefa){
 
 function removeElementoTarefaNalistaDeTarefas(objetoDeEventos){
     const botaoQueFoiClicado = objetoDeEventos.target
+    const nomeDaTarefa = botaoQueFoiClicado.previousSibling.previousSibling.innerText
+    removeTarefaNoLocalStorage(nomeDaTarefa)
     botaoQueFoiClicado.parentNode.remove()
+}
+
+function removeTarefaNoLocalStorage(nomeDaTarefa){
+    const listaDeTarefasSalvas = recuperaListaDeTarefasNoLocalStorage()
+    const resultado = listaDeTarefasSalvas.filter((tarefa) => {
+        return tarefa !== nomeDaTarefa
+    })
+    localStorage.setItem(CHAVE_DO_LOCAL_STORAGE, JSON.stringify(resultado))
 }
 
 function editaElementoTarefaNaListaDeTarefa(objetoDeEventos){
     const botaoQueFoiClicado = objetoDeEventos.target
     const paragrafoDaTarefa = botaoQueFoiClicado.previousSibling
     const textoInternoDoParagrafo = paragrafoDaTarefa.innerText
+    botaoQueFoiClicado.parentNode.remove()
+    removeTarefaNoLocalStorage(textoInternoDoParagrafo)
     const elementoInputTarefa = document.getElementById("input-tarefa")
     elementoInputTarefa.value = textoInternoDoParagrafo
-    botaoQueFoiClicado.parentNode.remove()
+    elementoInputTarefa.focus()
+}
 
+const listaDeTarefasSalvas = recuperaListaDeTarefasNoLocalStorage()
+if (listaDeTarefasSalvas.length >0){
+for (var i = 0; i < listaDeTarefasSalvas.length; i++){
+    criaElementoTarefaNaListaDeTarefas(listaDeTarefasSalvas[i])
 
+    }
 }
