@@ -1,5 +1,6 @@
-const CHAVE_DO_LOCAL_STORAGE ="listaDeTarefas"
-function pegarValorDeInputTarefa(){
+export const CHAVE_DO_LOCAL_STORAGE ="listaDeTarefas"
+
+export function pegarValorDeInputTarefa(){
     const elementoInputTarefa = document.getElementById("input-tarefa")
     const nomeDaTarefa = elementoInputTarefa.value
     const listaDeTarefasSalvas = recuperaListaDeTarefasNoLocalStorage()
@@ -11,17 +12,28 @@ function pegarValorDeInputTarefa(){
         elementoInputTarefa.value = ""
         elementoInputTarefa.focus()
         criaElementoTarefaNaListaDeTarefas(nomeDaTarefa)
-        salvaListaDeTarefasNoLocalStorage(parametroNomeDaTarefa)    
+        salvaListaDeTarefasNoLocalStorage(nomeDaTarefa)    
+    }
+}
+export function salvaListaDeTarefasNoLocalStorage(novaTarefa){
+    const listaDeTarefas = []
+
+    if (localStorage.getItem(CHAVE_DO_LOCAL_STORAGE)){
+        const listaSalva = JSON.parse(localStorage.getItem(CHAVE_DO_LOCAL_STORAGE))
+        listaSalva.push(novaTarefa)
+        localStorage.setItem(CHAVE_DO_LOCAL_STORAGE, JSON.stringify(listaSalva))
+    }else{
+        listaDeTarefas.push(novaTarefa)
+        localStorage.setItem(CHAVE_DO_LOCAL_STORAGE, JSON.stringify(listaDeTarefas))
     }
 }
 
-function recuperaListaDeTarefasNoLocalStorage(){
-    const listaDeTarefas = []
+export function recuperaListaDeTarefasNoLocalStorage(){
     return JSON.parse(localStorage.getItem(CHAVE_DO_LOCAL_STORAGE)) ?? []
 }
 
 
-function criaElementoTarefaNaListaDeTarefas(parametroNomeDaTarefa){
+export function criaElementoTarefaNaListaDeTarefas(parametroNomeDaTarefa){
     
     const elementoParagrafoTarefa = document.createElement("p")
     elementoParagrafoTarefa.style = "font-size: 18px; font-weight: 600"
@@ -48,14 +60,14 @@ function criaElementoTarefaNaListaDeTarefas(parametroNomeDaTarefa){
     elementoDivTarefas.appendChild(elementoDivTarefa)
 }
 
-function removeElementoTarefaNalistaDeTarefas(objetoDeEventos){
+export function removeElementoTarefaNalistaDeTarefas(objetoDeEventos){
     const botaoQueFoiClicado = objetoDeEventos.target
     const nomeDaTarefa = botaoQueFoiClicado.previousSibling.previousSibling.innerText
     removeTarefaNoLocalStorage(nomeDaTarefa)
     botaoQueFoiClicado.parentNode.remove()
 }
 
-function removeTarefaNoLocalStorage(nomeDaTarefa){
+export function removeTarefaNoLocalStorage(nomeDaTarefa){
     const listaDeTarefasSalvas = recuperaListaDeTarefasNoLocalStorage()
     const resultado = listaDeTarefasSalvas.filter((tarefa) => {
         return tarefa !== nomeDaTarefa
@@ -63,7 +75,7 @@ function removeTarefaNoLocalStorage(nomeDaTarefa){
     localStorage.setItem(CHAVE_DO_LOCAL_STORAGE, JSON.stringify(resultado))
 }
 
-function editaElementoTarefaNaListaDeTarefa(objetoDeEventos){
+export function editaElementoTarefaNaListaDeTarefa(objetoDeEventos){
     const botaoQueFoiClicado = objetoDeEventos.target
     const paragrafoDaTarefa = botaoQueFoiClicado.previousSibling
     const textoInternoDoParagrafo = paragrafoDaTarefa.innerText
@@ -74,10 +86,3 @@ function editaElementoTarefaNaListaDeTarefa(objetoDeEventos){
     elementoInputTarefa.focus()
 }
 
-const listaDeTarefasSalvas = recuperaListaDeTarefasNoLocalStorage()
-if (listaDeTarefasSalvas.length >0){
-for (var i = 0; i < listaDeTarefasSalvas.length; i++){
-    criaElementoTarefaNaListaDeTarefas(listaDeTarefasSalvas[i])
-
-    }
-}
